@@ -1,0 +1,12 @@
+* {
+    user-select: none;
+}
+
+#cookies {
+    font-size: 36px;
+    margin: 12px;
+}
+
+#cookiesPerClick {
+    margin-left: 12px;
+}
