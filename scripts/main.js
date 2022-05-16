@@ -1,4 +1,5 @@
-let cookies = document.getElementById("cookies");
+const cookies = document.getElementById("cookies");
+const cookieImg = document.getElementById("cookieImg");
 let increment = 1;
 let cookieNum = 0;
 
@@ -43,7 +44,9 @@ function makeUpgradesAvailable() {
 }
 
 function setCookieSize() {
-    document.getElementById("cookieImg").setAttribute("width", cookieNum);
+    if ((cookieNum < 640) || (cookieNum >= 640 && cookieImg.getAttribute("width") < 640)) {
+        cookieImg.setAttribute("width", cookieNum);
+    }
 }
 
 function update() {
