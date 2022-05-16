@@ -10,3 +10,7 @@
 #cookiesPerClick {
     margin-left: 12px;
 }
+
+#cookieImg {
+    max-width: 640;
+}
