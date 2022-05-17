@@ -13,6 +13,7 @@ function getCookies() {
 function upgradeClick() {
     cookieNum -= increment * 30;
     increment = increment * 2;
+    updateCookiesPerClick();
     update();
 }
 
@@ -51,7 +52,6 @@ function setCookieSize() {
 
 function update() {
     setCookies();
-    updateCookiesPerClick();
     updateUpgradeCost();
     makeUpgradesAvailable();
     setCookieSize();
