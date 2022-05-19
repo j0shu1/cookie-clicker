@@ -1,16 +1,37 @@
 * {
+    color: white;
+    background-color: #7a520d;
     user-select: none;
 }
 
 #cookies {
+    width: 500px;
+    text-align: center;
     font-size: 36px;
-    margin: 12px;
+    margin: 0;
 }
 
 #cookiesPerClick {
-    margin-left: 12px;
+    width: 500px;
+    text-align: center;
 }
 
 #cookieImg {
-    max-width: 640px;
+    display: block;
+}
+
+#upgradeClick {
+    background-color:green;
+    display: inline;
+    float: right;
+}
+
+#upgradeClick:disabled {
+    background-color: gray;
+}
+
+#myBar {
+    background-color: white;
+    height: 10px;
+    width: 0px;
 }
