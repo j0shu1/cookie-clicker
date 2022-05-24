@@ -13,6 +13,7 @@ function updateCookiesPerClick() {
 
 function updateUpgradeCost() {
     document.getElementById("upgradeClick").textContent = `Upgrade click! (cost: ${increment * 30})`
+    document.getElementById("upgradeClicker").textContent = `Add auto-clicker! (cost: ${increment * 2 + 100})`
 }
 
 function makeUpgradesAvailable() {
@@ -20,6 +21,11 @@ function makeUpgradesAvailable() {
         document.getElementById("upgradeClick").disabled=false;
     } else {
         document.getElementById("upgradeClick").disabled=true;
+    }
+    if (cookieNum >= increment * 2 + 100){
+        document.getElementById("upgradeClicker").disabled=false;
+    } else {
+        document.getElementById("upgradeClicker").disabled=true;
     }
 }
 
@@ -43,10 +49,8 @@ function addCookie() {
     update();
 }
 
-document.getElementById("cookieImg").addEventListener("click", addCookie);
-document.getElementById("upgradeClick").addEventListener("click", upgradeClick);
-
 function move() {
+    document.getElementById("upgradeClicker").style.display = "none";
     var elem = document.getElementById("myBar");
     var width = 1;
     var id = setInterval(frame, 10);
@@ -57,9 +61,13 @@ function move() {
             move();
             addCookie();
         } else {
-        width += 5;
-        elem.style.width = width + 'px';
+            width += 5;
+            elem.style.width = width + 'px';
         }
     }
 }
-move();
+
+// Assign button functions to buttons
+document.getElementById("cookieImg").addEventListener("click", addCookie);
+document.getElementById("upgradeClick").addEventListener("click", upgradeClick);
+document.getElementById("upgradeClicker").addEventListener("click", move);

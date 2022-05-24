@@ -20,13 +20,13 @@
     display: block;
 }
 
-#upgradeClick {
+#upgradeClick, #upgradeClicker {
     background-color:green;
     display: inline;
     float: right;
 }
 
-#upgradeClick:disabled {
+#upgradeClick:disabled, #upgradeClicker:disabled {
     background-color: gray;
 }
 
