@@ -51,9 +51,9 @@ function updateCookiesPerClick() {
 
 // Updates what each button costs to use
 function updateUpgradeCost() {
-    upgradeClickButton.textContent = `Upgrade click! (cost: ${10 * 10 * clickUpNum * clickUpNum})`
-    buyClickerButton.textContent = `Add auto-clicker! (cost: ${150})`
-    upgradeClickerButton.textContent = `Upgrade clicker! (cost:${10 * 10 * clickerUpNum * clickerUpNum})`
+    upgradeClickButton.textContent = `Upgrade click! (cost: ${10 * 10 * clickUpNum * clickUpNum} cookies)`
+    buyClickerButton.textContent = `Add auto-clicker! (cost: ${150} cookies)`
+    upgradeClickerButton.textContent = `Upgrade clicker! (cost:${10 * 10 * clickerUpNum * clickerUpNum} cookies)`
 }
 
 // Based upon if there are enough cookies to purchase, enable or disable each button individually
