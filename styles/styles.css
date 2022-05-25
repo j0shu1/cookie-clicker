@@ -16,10 +16,6 @@
     text-align: center;
 }
 
-#cookieImg {
-    display: block;
-}
-
 button {
     background-color:green;
     display: inline;
@@ -29,7 +25,7 @@ button:disabled {
     background-color: gray;
 }
 
-#upgradeClicker {
+#upgradeClicker, #rebirthButton {
     display: none;
 }
 
@@ -49,4 +45,10 @@ button:disabled {
     /* position: absolute;
     top: 605px;
     left: 8px; */
+}
+
+#rebirthButton {
+    font-size: 50px;
+    width: 500px;
+    height: 60px;
 }

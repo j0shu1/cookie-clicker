@@ -7,11 +7,13 @@
 
 /* TO-DO:
         Add prestige functionality:
-            - Add button to HTML
-            - Make button visible when conditions are met
-            - Add prestige counter variable
-            - Modify number of cookies added by prestige counter
+            - ✔ Add button to HTML
+            - ✔ Make button visible when conditions are met
+            - ✔ Add prestige counter variable
+            - ✔ Modify number of cookies added by prestige counter
             - Reset cookies, upgrade numbers, and increment
+        
+        Ensure everything is adequately commented
 */
 
 // Initialize variables
@@ -25,6 +27,8 @@ let increment = 1;
 // Total number of cookies
 let cookieNum = 100;
 
+let rebirths = 0;
+
 // Initialize variables to hold element addresses. Self explanatory
 const cookies = document.getElementById("cookies");
 const upgradeClickButton = document.getElementById("upgradeClick");
@@ -32,6 +36,7 @@ const buyClickerButton = document.getElementById("buyClicker");
 const upgradeClickerButton = document.getElementById("upgradeClicker");
 const cookiesPerClick = document.getElementById("cookiesPerClick");
 const clickerPerSecond = document.getElementById("clickerPerSecond");
+const rebirthButton = document.getElementById("rebirthButton");
 
 // Update functions
 
@@ -81,6 +86,7 @@ function update() {
     showCookies();
     updateUpgradeCost();
     makeUpgradesAvailable();
+    checkRebirthEligibility();
 }
 
 // Button functions
@@ -90,7 +96,7 @@ function upgradeClick() {
     // Decrements number of cookies by this upgrade's cost
     cookieNum -= 10 * 10 * clickUpNum * clickUpNum;
     // Increases the number of cookies per click by a logarithmic growth
-    increment += Math.ceil(5 * Math.log(clickUpNum)) + 10;
+    increment += Math.ceil(5 * Math.log(clickUpNum)) + 10 + rebirths;
     // Increases the number of upgrades that have been applied to click
     clickUpNum ++;
     // Update the number of cookies per click as shown to the user
@@ -151,6 +157,11 @@ function move(element) {
     }
 }
 
+function updateClickerPerSecond() {
+    let actionsPerSecond = (1/(5 / (4 + clickerUpNum * 2))).toFixed(2);
+    clickerPerSecond.textContent = `${actionsPerSecond} auto-clicks per second (generating ${(actionsPerSecond * increment).toFixed()} cookies per second)`;
+}
+
 // Upgrades the auto-clicker
 function upgradeClicker() {
     // Decrement total cookies by the cost of the upgrade
@@ -162,9 +173,10 @@ function upgradeClicker() {
     update();
 }
 
-function updateClickerPerSecond() {
-    let actionsPerSecond = (1/(5 / (4 + clickerUpNum * 2))).toFixed(2);
-    clickerPerSecond.textContent = `${actionsPerSecond} auto-clicks per second (generating ${(actionsPerSecond * increment).toFixed()} cookies per second)`;
+function checkRebirthEligibility() {
+    if(clickUpNum + clickerUpNum >= 50) {
+        rebirthButton.style.display = "inline";
+    }
 }
 
 // Assign button functions to buttons
