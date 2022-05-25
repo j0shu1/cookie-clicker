@@ -1,31 +1,49 @@
 const cookies = document.getElementById("cookies");
+let clickUpNum = 1;
+let clickerUpNum = 2;
 let increment = 1;
 let cookieNum = 0;
 
+let upgradeClickButton = document.getElementById("upgradeClick");
+let buyClickerButton = document.getElementById("buyClicker");
+let upgradeClickerButton = document.getElementById("upgradeClicker");
+let cookiesPerClick = document.getElementById("cookiesPerClick");
+
 // Update functions
+function addCookie() {
+    cookieNum += increment;
+    update();
+}
+
 function showCookies() {
     cookies.textContent = cookieNum + " cookies";
 }
 
 function updateCookiesPerClick() {
-    document.getElementById("cookiesPerClick").innerHTML = `Current cookies per click: ${increment}`
+    cookiesPerClick.innerHTML = `Current cookies per click: ${increment}`
 }
 
 function updateUpgradeCost() {
-    document.getElementById("upgradeClick").textContent = `Upgrade click! (cost: ${increment * 30})`
-    document.getElementById("upgradeClicker").textContent = `Add auto-clicker! (cost: ${increment * 2 + 100})`
+    upgradeClickButton.textContent = `Upgrade click! (cost: ${10 * 10 * clickUpNum * clickUpNum})`
+    buyClickerButton.textContent = `Add auto-clicker! (cost: ${150})`
+    upgradeClickerButton.textContent = `Upgrade clicker! (cost:${10 * 10 * clickerUpNum * clickerUpNum})`
 }
 
 function makeUpgradesAvailable() {
-    if (cookieNum >= increment * 30) {
-        document.getElementById("upgradeClick").disabled=false;
+    if (cookieNum >= 10 * 10 * clickUpNum * clickUpNum) {
+        upgradeClickButton.disabled=false;
     } else {
-        document.getElementById("upgradeClick").disabled=true;
+        upgradeClickButton.disabled=true;
     }
-    if (cookieNum >= increment * 2 + 100){
-        document.getElementById("upgradeClicker").disabled=false;
+    if (cookieNum >= 150){
+        buyClickerButton.disabled=false;
     } else {
-        document.getElementById("upgradeClicker").disabled=true;
+        buyClickerButton.disabled=true;
+    }
+    if (cookieNum >= 10 * 10 * clickerUpNum * clickerUpNum) {
+        upgradeClickerButton.disabled=false;
+    } else {
+        upgradeClickerButton.disabled=true;
     }
 }
 
@@ -33,41 +51,53 @@ function update() {
     showCookies();
     updateUpgradeCost();
     makeUpgradesAvailable();
-    setCookieSize();
 }
 
 // Button functions
 function upgradeClick() {
-    cookieNum -= increment * 30;
-    increment = increment + 1;
+    cookieNum -= 10 * 10 * clickUpNum * clickUpNum;
+    increment += Math.ceil(((5 * Math.log(clickUpNum)))) + 10;
+    clickUpNum ++;
     updateCookiesPerClick();
     update();
 }
 
-function addCookie() {
-    cookieNum += increment;
+function startClicker() {
+    cookieNum -= 150;
+    buyClickerButton.style.display = "none";
+    upgradeClickerButton.style.display = "inline";
+    move("autoClicker", 10);
     update();
 }
 
-function move() {
-    document.getElementById("upgradeClicker").style.display = "none";
-    var elem = document.getElementById("myBar");
+function move(element) {
+    if (clickerUpNum > 500 - 4) {
+        upgradeClickerButton.style.display = "none";
+        clickerUpNum = 500;
+    }
+    var elem = document.getElementById(element);
     var width = 1;
     var id = setInterval(frame, 10);
     function frame() {
         if (width >= 500) {
             clearInterval(id);
             width = 0;
-            move();
+            move(element);
             addCookie();
         } else {
-            width += 5;
+            width += 4 + clickerUpNum;
             elem.style.width = width + 'px';
         }
     }
 }
 
+function upgradeClicker() {
+    cookieNum -= 10 * 10 * clickerUpNum * clickerUpNum;
+    clickerUpNum += 2;
+}
+
 // Assign button functions to buttons
 document.getElementById("cookieImg").addEventListener("click", addCookie);
 document.getElementById("upgradeClick").addEventListener("click", upgradeClick);
-document.getElementById("upgradeClicker").addEventListener("click", move);
+document.getElementById("buyClicker").addEventListener("click", startClicker);
+upgradeClickerButton.addEventListener("click", upgradeClicker);

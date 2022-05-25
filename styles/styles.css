@@ -20,17 +20,20 @@
     display: block;
 }
 
-#upgradeClick, #upgradeClicker {
+button {
     background-color:green;
     display: inline;
-    float: right;
 }
 
-#upgradeClick:disabled, #upgradeClicker:disabled {
+button:disabled {
     background-color: gray;
 }
 
-#myBar {
+#upgradeClicker {
+    display: none;
+}
+
+div {
     background-color: white;
     height: 10px;
     width: 0px;
