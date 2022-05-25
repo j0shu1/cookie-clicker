@@ -56,7 +56,7 @@ function updateUpgradeCost() {
     upgradeClickerButton.textContent = `Upgrade clicker! (cost:${10 * 10 * clickerUpNum * clickerUpNum})`
 }
 
-// Based upon if there are enough cookies to purchase, enable each button individually
+// Based upon if there are enough cookies to purchase, enable or disable each button individually
 function makeUpgradesAvailable() {
     if (cookieNum >= 10 * 10 * clickUpNum * clickUpNum) {
         upgradeClickButton.disabled=false;
@@ -75,7 +75,7 @@ function makeUpgradesAvailable() {
     }
 }
 
-// Main update function. Calls all update functions
+// Main update function. Calls all update functions to draw changes to the screen
 function update() {
     showCookies();
     updateUpgradeCost();
