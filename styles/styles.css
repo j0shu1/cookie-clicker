@@ -1,6 +1,6 @@
 * {
     color: white;
-    background-color: #7a520d;
+    background-color: #5e3e07;
     user-select: none;
 }
 
@@ -33,9 +33,20 @@ button:disabled {
     display: none;
 }
 
-div {
+#autoClicker {
     background-color: white;
-    height: 10px;
+    height: 20px;
     width: 0px;
     max-width: 500px;
+    color: black;   
+}
+
+#clickerPerSecond {
+    background-color: #5e3e0709;
+    color:white;
+    margin: 0;
+    font-size: 17px;
+    /* position: absolute;
+    top: 605px;
+    left: 8px; */
 }

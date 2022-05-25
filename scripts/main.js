@@ -23,7 +23,7 @@ let clickerUpNum = 2;
 // How much cookies increase per click
 let increment = 1;
 // Total number of cookies
-let cookieNum = 0;
+let cookieNum = 100;
 
 // Initialize variables to hold element addresses. Self explanatory
 const cookies = document.getElementById("cookies");
@@ -31,6 +31,7 @@ const upgradeClickButton = document.getElementById("upgradeClick");
 const buyClickerButton = document.getElementById("buyClicker");
 const upgradeClickerButton = document.getElementById("upgradeClicker");
 const cookiesPerClick = document.getElementById("cookiesPerClick");
+const clickerPerSecond = document.getElementById("clickerPerSecond");
 
 // Update functions
 
@@ -53,7 +54,7 @@ function updateCookiesPerClick() {
 function updateUpgradeCost() {
     upgradeClickButton.textContent = `Upgrade click! (cost: ${10 * 10 * clickUpNum * clickUpNum} cookies)`
     buyClickerButton.textContent = `Add auto-clicker! (cost: ${150} cookies)`
-    upgradeClickerButton.textContent = `Upgrade clicker! (cost:${10 * 10 * clickerUpNum * clickerUpNum} cookies)`
+    upgradeClickerButton.textContent = `Upgrade clicker! (cost: ${10 * 10 * clickerUpNum * clickerUpNum} cookies)`
 }
 
 // Based upon if there are enough cookies to purchase, enable or disable each button individually
@@ -89,11 +90,14 @@ function upgradeClick() {
     // Decrements number of cookies by this upgrade's cost
     cookieNum -= 10 * 10 * clickUpNum * clickUpNum;
     // Increases the number of cookies per click by a logarithmic growth
-    increment += Math.ceil(((5 * Math.log(clickUpNum)))) + 10;
+    increment += Math.ceil(5 * Math.log(clickUpNum)) + 10;
     // Increases the number of upgrades that have been applied to click
     clickUpNum ++;
     // Update the number of cookies per click as shown to the user
     updateCookiesPerClick();
+    if (clickUpNum != 2) {
+        updateClickerPerSecond();
+    }
     // Update the screen (showing that cookies were spent on this purchase)
     update();
 }
@@ -107,6 +111,7 @@ function startClicker() {
     upgradeClickerButton.style.display = "inline";
     // Begin the bar graph increment
     move("autoClicker", 10);
+    updateClickerPerSecond();
     // Update the screen (applying the purchase decrement to total cookies as seen by the user)
     update();
 }
@@ -152,12 +157,18 @@ function upgradeClicker() {
     cookieNum -= 10 * 10 * clickerUpNum * clickerUpNum;
     // Increase the number of upgrades purchased
     clickerUpNum ++;
+    updateClickerPerSecond();
     // Update the screen (applying the purchase decrement to total cookies as seen by the user)
     update();
 }
 
+function updateClickerPerSecond() {
+    let actionsPerSecond = (1/(5 / (4 + clickerUpNum * 2))).toFixed(2);
+    clickerPerSecond.textContent = `${actionsPerSecond} auto-clicks per second (generating ${(actionsPerSecond * increment).toFixed()} cookies per second)`;
+}
+
 // Assign button functions to buttons
 document.getElementById("cookieImg").addEventListener("click", addCookie);
-document.getElementById("upgradeClick").addEventListener("click", upgradeClick);
-document.getElementById("buyClicker").addEventListener("click", startClicker);
-upgradeClickerButton.addEventListener("click", upgradeClicker);
+upgradeClickButton.addEventListener("click", upgradeClick);
+buyClickerButton.addEventListener("click", startClicker);
+upgradeClickerButton.addEventListener("click", upgradeClicker); 
