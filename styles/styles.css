@@ -37,4 +37,5 @@ div {
     background-color: white;
     height: 10px;
     width: 0px;
+    max-width: 500px;
 }

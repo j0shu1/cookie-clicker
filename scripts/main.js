@@ -141,11 +141,7 @@ function move(element) {
             //   Increment the width by 4 + the upgrade number px
             width += 4 + clickerUpNum * 2;
             //   Update the style of the bar's width to equal the new width
-            if (width <= 500){
-                elem.style.width = width + 'px';
-            } else {
-                elem.style.width = "500px";
-            }
+            elem.style.width = width + 'px';
         }
     }
 }
