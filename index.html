@@ -11,15 +11,15 @@
 <body>
     <p id="cookies">Click on the cookie to begin!</p>
     <p id="cookiesPerClick">Current cookies per click: 1</p>
-    <img id="cookieImg" src="images/cookie.png" alt="image of delicious cookie" width="500">
+    <p id="rebirths"></p>
+    <img id="cookieImg" src="images/cookie.png" alt="image of delicious cookie" width="500" draggable="false">
+    <div id="container">
+        <section id="autoClicker"></section>
+    </div>
     <button id="upgradeClick" disabled>Upgrade click! (cost: 100 cookies)</button>
     <button id="buyClicker" disabled>Add auto-clicker! (cost: 150 cookies)</button>
     <button id="upgradeClicker" disabled>Upgrade auto-clicker! (cost: 400 cookies)</button>
-    <div id="container">
-        <section id="autoClicker"></section>
-        <p id="clickerPerSecond"></p>
-    </div>
-    <button id="rebirthButton">REBIRTH</button>
+    <button id="rebirthButton">REBIRTH<p id="smallText">(for greater growth)</p></button>
     <script src="scripts/main.js"></script>
 </body>
 </html>

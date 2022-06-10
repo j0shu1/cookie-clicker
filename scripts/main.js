@@ -6,13 +6,6 @@
 */
 
 /* TO-DO:
-        Add prestige functionality:
-            - ✔ Add button to HTML
-            - ✔ Make button visible when conditions are met
-            - ✔ Add prestige counter variable
-            - ✔ Modify number of cookies added by prestige counter
-            - Reset cookies, upgrade numbers, and increment
-        
         Ensure everything is adequately commented
 */
 
@@ -25,8 +18,8 @@ let clickerUpNum = 2;
 // How much cookies increase per click
 let increment = 1;
 // Total number of cookies
-let cookieNum = 100;
-
+let cookieNum = 0;
+// How many times the user has "rebirthed"
 let rebirths = 0;
 
 // Initialize variables to hold element addresses. Self explanatory
@@ -101,13 +94,11 @@ function upgradeClick() {
     clickUpNum ++;
     // Update the number of cookies per click as shown to the user
     updateCookiesPerClick();
-    if (clickUpNum != 2) {
-        updateClickerPerSecond();
-    }
     // Update the screen (showing that cookies were spent on this purchase)
     update();
 }
 
+let autoClicking = false;
 function startClicker() {
     // The auto-clicker can only be purchased once, so subtract a flat 150 from the total cookies
     cookieNum -= 150;
@@ -116,8 +107,8 @@ function startClicker() {
     // Make the button to upgrade the auto-clicker visible
     upgradeClickerButton.style.display = "inline";
     // Begin the bar graph increment
-    move("autoClicker", 10);
-    updateClickerPerSecond();
+    autoClicking = true
+    move("autoClicker");
     // Update the screen (applying the purchase decrement to total cookies as seen by the user)
     update();
 }
@@ -147,6 +138,10 @@ function move(element) {
             move(element);
             // "Click" the cookie
             addCookie();
+        } else if (!autoClicking){
+            clearInterval(id);
+            width = 0;
+            elem.style.width = "0px";
         } else {
             // If the width has not yet reached the maximum width:
             //   Increment the width by 4 + the upgrade number px
@@ -157,25 +152,45 @@ function move(element) {
     }
 }
 
-function updateClickerPerSecond() {
-    let actionsPerSecond = (1/(5 / (4 + clickerUpNum * 2))).toFixed(2);
-    clickerPerSecond.textContent = `${actionsPerSecond} auto-clicks per second (generating ${(actionsPerSecond * increment).toFixed()} cookies per second)`;
-}
-
 // Upgrades the auto-clicker
 function upgradeClicker() {
     // Decrement total cookies by the cost of the upgrade
     cookieNum -= 10 * 10 * clickerUpNum * clickerUpNum;
     // Increase the number of upgrades purchased
     clickerUpNum ++;
-    updateClickerPerSecond();
     // Update the screen (applying the purchase decrement to total cookies as seen by the user)
     update();
 }
 
+function resetAutoClicker() {
+    autoClicking = false;
+}
+
 function checkRebirthEligibility() {
-    if(clickUpNum + clickerUpNum >= 50) {
-        rebirthButton.style.display = "inline";
+    if (clickUpNum + clickerUpNum >= (50 + (20*rebirths))) {
+        rebirthButton.style.display = "block";
+    }
+}
+
+// Reset cookies, upgrade numbers, and increment
+function rebirth() {
+    if (rebirthButton.style.display == "block") {
+        rebirthButton.style.display = "none";
+
+        clickUpNum = 1;
+        clickerUpNum = 2;
+        increment = 1;
+        cookieNum = 0;
+
+        rebirths ++;
+
+        rebirthText = document.getElementById("rebirths");
+        rebirthText.innerHTML = `Rebirths: ${rebirths}`;
+        rebirthText.style.display = "block";
+
+        resetAutoClicker();
+        updateCookiesPerClick();
+        update();
     }
 }
 
@@ -184,3 +199,4 @@ document.getElementById("cookieImg").addEventListener("click", addCookie);
 upgradeClickButton.addEventListener("click", upgradeClick);
 buyClickerButton.addEventListener("click", startClicker);
 upgradeClickerButton.addEventListener("click", upgradeClicker); 
+rebirthButton.addEventListener("click", rebirth);

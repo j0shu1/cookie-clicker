@@ -37,18 +37,26 @@ button:disabled {
     color: black;   
 }
 
-#clickerPerSecond {
-    background-color: #5e3e0709;
-    color:white;
-    margin: 0;
-    font-size: 17px;
-    /* position: absolute;
-    top: 605px;
-    left: 8px; */
-}
 
 #rebirthButton {
     font-size: 50px;
     width: 500px;
     height: 60px;
+}
+
+#smallText {
+    font-size: 12px;
+    font-style: italic;
+    background-color: green;
+    margin: 0;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+#rebirths {
+    font-size: 10px;
+    width: 500px;
+    text-align: center;
+    display: block;
 }
