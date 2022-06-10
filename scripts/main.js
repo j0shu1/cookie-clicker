@@ -164,6 +164,8 @@ function upgradeClicker() {
 
 function resetAutoClicker() {
     autoClicking = false;
+    buyClickerButton.style.display = "inline";
+    upgradeClickerButton.style.display = "none";
 }
 
 function checkRebirthEligibility() {
