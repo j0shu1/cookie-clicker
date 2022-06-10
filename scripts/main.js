@@ -179,12 +179,13 @@ function rebirth() {
     if (rebirthButton.style.display == "block") {
         rebirthButton.style.display = "none";
 
+        rebirths ++;
+
         clickUpNum = 1;
         clickerUpNum = 2;
-        increment = 1;
+        increment = 1 + rebirths;
         cookieNum = 0;
 
-        rebirths ++;
 
         rebirthText = document.getElementById("rebirths");
         rebirthText.innerHTML = `Rebirths: ${rebirths}`;
