@@ -60,4 +60,6 @@ button:disabled {
     width: 500px;
     text-align: center;
     display: block;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
